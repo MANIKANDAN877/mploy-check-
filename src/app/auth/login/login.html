@@ -1,0 +1,54 @@
+<div class="login-container">
+  <div class="glass-card">
+    <div class="header">
+      <h1>Welcome Back</h1>
+      <p>Enter your credentials to access the portal</p>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <!-- Username -->
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" formControlName="username" placeholder="e.g. admin or user" />
+        <div class="error" *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.invalid">
+          Username is required
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="password" placeholder="••••••••" />
+        <div class="error" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
+          Password is required
+        </div>
+      </div>
+
+      <!-- Role Selection -->
+      <div class="form-group">
+        <label for="role">Select Role</label>
+        <div class="select-wrapper">
+          <select id="role" formControlName="role">
+            <option value="General User">General User</option>
+            <option value="Admin">Admin</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Error Message -->
+      <div class="global-error" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" [disabled]="isLoading || loginForm.invalid" [class.loading]="isLoading">
+        <span *ngIf="!isLoading">Login</span>
+        <span *ngIf="isLoading" class="spinner"></span>
+      </button>
+    </form>
+  </div>
+
+  <!-- Ambient Background Blobs -->
+  <div class="circle circle-1"></div>
+  <div class="circle circle-2"></div>
+</div>

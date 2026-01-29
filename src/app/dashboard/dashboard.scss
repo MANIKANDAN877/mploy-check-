@@ -1,0 +1,211 @@
+// Reuse variables (in a real app, these would be in a shared variables file)
+$primary-color: #6366f1;
+$accent-color: #ec4899;
+$dark-bg: #0f172a;
+$glass-bg: rgba(255, 255, 255, 0.05);
+$glass-border: rgba(255, 255, 255, 0.1);
+$text-light: #f8fafc;
+$text-gray: #94a3b8;
+
+:host {
+    display: block;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.dashboard-container {
+    min-height: 100vh;
+    background-color: $dark-bg;
+    color: $text-light;
+    position: relative;
+    overflow-x: hidden;
+}
+
+// Background Blobs
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    z-index: 0;
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.circle-1 {
+    width: 500px;
+    height: 500px;
+    background: $primary-color;
+    top: -100px;
+    left: -100px;
+}
+
+.circle-2 {
+    width: 400px;
+    height: 400px;
+    background: $accent-color;
+    bottom: -50px;
+    right: -50px;
+}
+
+// Navigation
+.glass-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid $glass-border;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    .logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        background: linear-gradient(to right, $primary-color, $accent-color);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .user-profile {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid $primary-color;
+        }
+
+        .info {
+            display: flex;
+            flex-direction: column;
+
+            .name {
+                font-weight: 600;
+                font-size: 0.9rem;
+            }
+
+            .role {
+                font-size: 0.75rem;
+                color: $text-gray;
+            }
+        }
+
+        .logout-btn {
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: 1px solid $glass-border;
+            color: $text-light;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+
+            &:hover {
+                background: rgba(255, 255, 255, 0.1);
+                border-color: $text-light;
+            }
+        }
+    }
+}
+
+// Content
+.content {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+}
+
+.glass-card {
+    background: $glass-bg;
+    backdrop-filter: blur(12px);
+    border: 1px solid $glass-border;
+    border-radius: 24px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.welcome-card {
+    h2 {
+        margin: 0 0 0.5rem;
+        font-size: 1.8rem;
+    }
+
+    p {
+        margin: 0;
+        color: $text-gray;
+    }
+}
+
+// Table
+.table-container {
+    h3 {
+        margin-top: 0;
+        margin-bottom: 1.5rem;
+        border-bottom: 1px solid $glass-border;
+        padding-bottom: 1rem;
+    }
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th,
+    td {
+        padding: 1rem;
+        text-align: left;
+        border-bottom: 1px solid $glass-border;
+    }
+
+    th {
+        color: $text-gray;
+        font-weight: 500;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 0.05em;
+    }
+
+    tr:last-child td {
+        border-bottom: none;
+    }
+
+    tr:hover td {
+        background: rgba(255, 255, 255, 0.02);
+    }
+}
+
+// Status Badges
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+
+    &.active {
+        background: rgba(16, 185, 129, 0.2);
+        color: #34d399;
+        border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    &.pending {
+        background: rgba(245, 158, 11, 0.2);
+        color: #fbbf24;
+        border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    &.completed {
+        background: rgba(59, 130, 246, 0.2);
+        color: #60a5fa;
+        border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+}

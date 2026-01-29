@@ -1,0 +1,72 @@
+<div class="admin-container">
+    <nav class="glass-nav">
+        <div class="logo">NSQTech Admin</div>
+        <div class="controls">
+            <button (click)="logout()" class="logout-btn">Logout</button>
+        </div>
+    </nav>
+
+    <main class="content">
+        <div class="header-card glass-card">
+            <h2>User Management</h2>
+            <p>Manage system access and roles.</p>
+
+            <!-- Async Delay Control -->
+            <div class="delay-control">
+                <label>Simulate API Delay (ms):</label>
+                <input type="number" [(ngModel)]="delayMs" min="100" max="5000">
+                <span class="hint">Adjust this to test async visualization</span>
+            </div>
+        </div>
+
+        <!-- Loading State for Initial Load -->
+        <div *ngIf="isLoading" class="loading-overlay">
+            <div class="spinner-large"></div>
+            <p>Loading Users...</p>
+        </div>
+
+        <div class="table-container glass-card" *ngIf="!isLoading">
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Avatar</th>
+                            <th>Username</th>
+                            <th>Name</th>
+                            <th>Role</th>
+                            <th>Email</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let user of users">
+                            <td><img [src]="user.avatar" class="avatar-small"></td>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.name }}</td>
+                            <td>
+                                <span class="role-badge" [class.admin]="user.role === 'Admin'">
+                                    {{ user.role }}
+                                </span>
+                            </td>
+                            <td>{{ user.email }}</td>
+                            <td>
+                                <!-- Delete Action with Async State -->
+                                <button class="action-btn delete" [disabled]="processingUserId === user.id"
+                                    (click)="deleteUser(user.id)">
+                                    <span *ngIf="processingUserId !== user.id">Delete</span>
+                                    <span *ngIf="processingUserId === user.id" class="spinner-small"></span>
+                                    <span *ngIf="processingUserId === user.id"
+                                        class="processing-text">Processing...</span>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Ambient Background -->
+    <div class="circle circle-1"></div>
+    <div class="circle circle-2"></div>
+</div>

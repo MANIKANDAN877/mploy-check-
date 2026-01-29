@@ -1,0 +1,56 @@
+<div class="dashboard-container" *ngIf="currentUser$ | async as user">
+    <nav class="glass-nav">
+        <div class="logo">NSQTech Portal</div>
+        <div class="user-profile">
+            <img [src]="user.avatar" alt="Avatar" class="avatar">
+            <div class="info">
+                <span class="name">{{ user.name }}</span>
+                <span class="role">{{ user.role }}</span>
+            </div>
+            <button (click)="logout()" class="logout-btn">Logout</button>
+        </div>
+    </nav>
+
+    <main class="content">
+        <div class="welcome-card glass-card">
+            <h2>Hello, {{ user.name }}!</h2>
+            <p>Here are your assigned records.</p>
+        </div>
+
+        <div class="table-container glass-card">
+            <h3>Project Records</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Access</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let record of records$ | async">
+                            <td>#{{ record.id }}</td>
+                            <td>{{ record.title }}</td>
+                            <td>{{ record.description }}</td>
+                            <td>{{ record.date | date:'mediumDate' }}</td>
+                            <td>
+                                <span class="status-badge" [ngClass]="record.status.toLowerCase()">
+                                    {{ record.status }}
+                                </span>
+                            </td>
+                            <td>{{ record.accessLevel }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Ambient Background Blobs -->
+    <div class="circle circle-1"></div>
+    <div class="circle circle-2"></div>
+</div>
